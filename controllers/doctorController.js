@@ -27,7 +27,7 @@ export const getUserProfile = asyncHandler(async (req, res) => {
 
 
 export const registerUser = asyncHandler(async (req, res) => {
-    const { name, age, password, experience, specialization, email, phone, availability, image } = req.body;
+    const { name, age, password, experience, email, phone, image } = req.body;
     const userExists = await Doctor.findOne({ email });
     if (userExists) {
         res.status(400);
@@ -39,10 +39,10 @@ export const registerUser = asyncHandler(async (req, res) => {
         name,
         email,
         age,
-        availability,
+        //availability, // need to remove 
         experience,
         image,
-        specialization: specialization.split(", "),
+        //specialization: specialization.split(", "), // need to remove
         password: hashedPassword,
         phoneNumber: phone,
     });
@@ -61,7 +61,6 @@ export const registerUser = asyncHandler(async (req, res) => {
             reviews: newUser.reviews,
             rating: newUser.rating,
             image: newUser.image,
-            availability: newUser.availability,
             token,
         });
     } else {
@@ -94,7 +93,6 @@ export const loginUser = asyncHandler(async (req, res) => {
             reviews: user.reviews,
             rating: user.rating,
             image: user.image,
-            availability: user.availability,
             token,
         });
     } else {

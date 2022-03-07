@@ -16,8 +16,12 @@ const postSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Farmer",
         required: true
+    } // need to add date
+},
+    {
+        timestamps: true
     }
-})
+)
 
 const Post = mongoose.model("Post", postSchema)
 export default Post;

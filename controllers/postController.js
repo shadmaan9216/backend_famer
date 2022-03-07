@@ -14,7 +14,7 @@ export const createPost = asyncHandler(async (req, res) => {
     });
     await post.save();
     res.status(202).json(post);
-});
+})
 
 // @desc get Posts by id
 // @route get /api/post/

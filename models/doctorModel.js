@@ -33,16 +33,9 @@ const doctorSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    specialization: {
-        type: Array,
-    },
     image: {
         type: String,
         required: true
-    },
-    availability: {
-        type: Boolean,
-        default: false
     },
     rating: {
         type: Number,
