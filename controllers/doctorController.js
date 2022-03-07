@@ -17,7 +17,7 @@ export const getAlluser = asyncHandler(async (req, res) => {
 
 export const getUserProfile = asyncHandler(async (req, res) => {
     const { id } = req.params;
-    const user = await Doctor.findById(id);
+    const user = await Doctor.findById(id).populate("connected");
     if (user) {
         return res.json(user);
     } else {
@@ -71,7 +71,8 @@ export const registerUser = asyncHandler(async (req, res) => {
 
 export const loginUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
-    const user = await Doctor.findOne({ email });
+    const user = await Doctor.findOne({ email }).populate("connected");
+    console.log(user);
     if (!user) {
         res.status(400).send("Invalid email or password");
     }
@@ -85,14 +86,7 @@ export const loginUser = asyncHandler(async (req, res) => {
     if (user) {
         res.status(200);
         res.json({
-            id: user._id,
-            name: user.name,
-            email: user.email,
-            phoneNumber: user.phoneNumber,
-            age: user.age,
-            reviews: user.reviews,
-            rating: user.rating,
-            image: user.image,
+            user,
             token,
         });
     } else {
