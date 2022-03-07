@@ -4,7 +4,6 @@ import asyncHandler from "express-async-handler"
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import Doctor from "../models/doctorModel.js"
-import multer from "multer";
 
 //@desc register farmer
 //@route POST /api/farmer/register
