@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler"
 import Doctor from "../models/doctorModel.js"
+import Post from "../models/postModel.js";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcryptjs"
 
@@ -72,7 +73,15 @@ export const registerUser = asyncHandler(async (req, res) => {
 export const loginUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
     const user = await Doctor.findOne({ email }).populate("connected");
-    console.log(user);
+    const farmers = user.connected;
+    // const posts = await Post.findById(farmerId).populate("");
+    const posts = [];
+    // console.log(user);
+    for (let f in farmers) {
+        const post = await Post.find({ farmer: (farmers[f]._id.toString()) });
+        posts.push(post);
+    }
+    //console.log(posts);
     if (!user) {
         res.status(400).send("Invalid email or password");
     }
@@ -87,6 +96,7 @@ export const loginUser = asyncHandler(async (req, res) => {
         res.status(200);
         res.json({
             user,
+            posts,
             token,
         });
     } else {
