@@ -84,7 +84,7 @@ export const getFarmerById = asyncHandler(async (req, res) => {
 // @access public
 export const connectFarmer = asyncHandler(async (req, res) => {
     const doctor = await Doctor.findOneAndUpdate({ _id: req.body.doctorId }, { $push: { connected: req.body.farmerId } }, { new: true }).populate("connected", "name email phone");
-    console.log("D", doctor);
+    //console.log("D", doctor);
     if (!doctor) {
         return res.send("NULL occured");
     }
