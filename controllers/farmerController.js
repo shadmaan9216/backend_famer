@@ -92,7 +92,9 @@ export const connectFarmer = asyncHandler(async (req, res) => {
     res.json(doctor);
 })
 
+// @desc get farmer posts by id
+// @route GET /api/farmer/:id
 export const getPosts = asyncHandler(async (req, res) => {
-    const posts = await Farmer.findById(req.params.id).populate("posts");
+    const posts = await Farmer.findById(req.body.farmerId).populate("posts");
     res.json(posts);
 });

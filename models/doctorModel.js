@@ -42,6 +42,11 @@ const doctorSchema = new mongoose.Schema({
         default: 0,
     },
     reviews: [reviewSchema],
+    numReviews: {
+        type: Number,
+        default: 0,
+        required: true,
+    },
     email: {
         type: String,
         required: true
