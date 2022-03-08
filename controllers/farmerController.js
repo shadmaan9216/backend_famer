@@ -60,7 +60,7 @@ export const authUser = asyncHandler(async (req, res) => {
         expiresIn: "30d",
     });
 
-    res.json({
+    res.status(201).json({
         farmer,
         token,
     });

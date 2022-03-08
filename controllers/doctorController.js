@@ -81,7 +81,7 @@ export const loginUser = asyncHandler(async (req, res) => {
         const post = await Post.find({ farmer: (farmers[f]._id.toString()) });
         posts.push(post);
     }
-    //console.log(posts);
+    // console.log(posts);
     if (!user) {
         res.status(400).send("Invalid email or password");
     }
