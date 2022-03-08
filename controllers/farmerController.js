@@ -31,10 +31,7 @@ export const registerFarmer = asyncHandler(async (req, res) => {
     if (newUser) {
         res.status(201);
         res.json({
-            id: newUser._id,
-            name: newUser.name,
-            email: newUser.email,
-            phoneNumber: newUser.phoneNumber,
+            newUser,
             token,
         });
     } else {
