@@ -7,8 +7,16 @@ import Doctor from "../models/doctorModel.js";
 // @route POST /api/post/create
 export const createPost = asyncHandler(async (req, res) => {
     const { title, description, image, farmerId, doctorId } = req.body;
-    const doctor = await Doctor.findOneAndUpdate({ _id: req.body.doctorId }, { $push: { connected: req.body.farmerId } }, { new: true }).populate("connected", "name email phone");
+    //const doctor = await Doctor.findOneAndUpdate({ _id: req.body.doctorId }, { $push: {connected: req.body.farmerId } }, { new: true }).populate("connected", "name email phone");
+
+    const doctor = await Doctor.findOne({ _id: req.body.doctorId });
+
+    if (!doctor.connected.includes(req.body.farmerId)) {
+        const doctor2 = await Doctor.updateOne({ _id: req.body.doctorId }, { $push: { connected: req.body.farmerId } }).populate("connected", "name email phone");
+    }
+
     //console.log("D", doctor);
+
     if (!doctor) {
         return res.send("NULL occured");
     }
