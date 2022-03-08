@@ -83,9 +83,11 @@ export const loginUser = asyncHandler(async (req, res) => {
     for (let f in farmers) {
         const post = await Post.find({ farmer: (farmers[f]._id.toString()) });
         for (let p in post) {
+            if (post[p].doctor && post[p].doctor == user._id.toString()) {
+                const a = await Farmer.findById(post[p].farmer.toString());
+                temp.push({ "farmer": a, "post": post[p] });
+            }
 
-            const a = await Farmer.findById(post[p].farmer.toString());
-            temp.push({ "farmer": a, "post": post[p] });
         }
         posts.push(temp);
     }
